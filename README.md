@@ -2,8 +2,8 @@
 
 ## 📌 Descripción
 
-Proyecto de ejemplo en Python que utiliza **PySpark** para procesar datos financieros por cliente.  
-Incluye una clase `Operativa` que calcula métricas agregadas sobre los datos, y cuenta con tests automatizados usando `pytest`.
+Proyecto con multiples funcionalidades utilizadas en Pyspark.  
+Incluye diversas clases y metodos que abordan diversos problemas genericos.
 
 ---
 
@@ -14,8 +14,9 @@ proyectoEjemplo/
 ├── app.py              # Archivo principal de la aplicación
 ├── version.py          # Archivo con la versión del proyecto
 ├── clases/             # Carpeta con clases principales
-│   └── operativa_spark.py
-|   └── operativa_pandas.py
+│   └── operativa_fichero_spark.py
+|   └── operativa_fichero_pandas.py
+│   └── procesamiento_web.py
 ├── test/               # Tests automatizados con pytest
 │   └── test_operativa_pandas.py
 │   └── test_metodos.py
