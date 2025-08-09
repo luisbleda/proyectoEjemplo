@@ -1,5 +1,5 @@
 import setuptools
-import os
+
 
 def get_version():
     version = {}
@@ -10,6 +10,7 @@ def get_version():
                 version = line.split(delim)[1]
                 break
     return version
+
 
 setuptools.setup(
     name="proyectoEjemplo",

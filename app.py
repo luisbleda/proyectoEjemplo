@@ -1,8 +1,8 @@
 from pyspark.sql import SparkSession
 from create_files.create_operativas_parquet_spark import CreateFileSpark
 from create_files.create_operativas_parquet_pandas import CreateFilePandas
-from clases.operativa_spark import OperativaSpark
-from clases.operativa_pandas import OperativaPandas
+from clases.operativa_fichero_spark import OperativaSpark
+from clases.operativa_fichero_pandas import OperativaPandas
 from utils.constantes import (
     RUTA_PARQUET_SPARK, RUTA_CSV_SPARK, RUTA_CLIENTES,
     RUTA_CSV_PANDAS, RUTA_PARQUET_PANDAS, ESC_PARQUET_SPARK, ESC_CSV_SPARK,
@@ -24,7 +24,7 @@ def main():
     else:
         print("Creación Fichero nuevo deshabilitada.")
 
-    ## OPERATIVA SPARK
+    # OPERATIVA SPARK
     df_csv = spark.read.option(
         "header", True).option("inferSchema", True).csv(RUTA_CSV_SPARK)
     df_parquet = spark.read.parquet(RUTA_PARQUET_SPARK)
@@ -38,10 +38,14 @@ def main():
     oper_parquet.coalesce(1).write.mode("overwrite").parquet(
         ESC_PARQUET_SPARK)
 
-    ## OPERATIVA PANDAS
-    df_csv_pandas = pd.read_csv(RUTA_CSV_PANDAS, sep=",", parse_dates=["fecha_saldo"])
+    # OPERATIVA PANDAS
+    df_csv_pandas = pd.read_csv(
+        RUTA_CSV_PANDAS, sep=",",
+        parse_dates=["fecha_saldo"])
     df_parquet_pandas = pd.read_parquet(RUTA_PARQUET_PANDAS)
-    df_clientes_pandas = pd.read_csv(RUTA_CLIENTES_PANDAS, sep=",", parse_dates=["fecha_nacimiento"])
+    df_clientes_pandas = pd.read_csv(
+        RUTA_CLIENTES_PANDAS, sep=",",
+        parse_dates=["fecha_nacimiento"])
 
     oper_csv = OperativaPandas(df_csv_pandas, df_clientes_pandas).run()
     oper_parquet = OperativaPandas(df_parquet_pandas, df_clientes_pandas).run()
