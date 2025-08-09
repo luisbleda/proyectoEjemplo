@@ -47,7 +47,9 @@ class OperativaSpark:
         )
 
         # Unir saldo_final al DataFrame original por codigo_cliente
-        df_con_saldo = df.join(saldo_por_cliente, on="codigo_cliente", how="left")
+        df_con_saldo = df.join(saldo_por_cliente,
+                               on="codigo_cliente",
+                               how="left")
 
         return df_con_saldo
 
@@ -71,7 +73,8 @@ class OperativaSpark:
         # Calcular edad en años con datediff y floor
         df_merged = df_merged.withColumn(
             'edad',
-            F.floor(F.datediff(F.lit(hoy_str), F.col('fecha_nacimiento')) / 365)
+            F.floor(F.datediff(F.lit(hoy_str),
+                               F.col('fecha_nacimiento')) / 365)
         )
 
         # Crear columna menor_30: SI si edad < 30, NO en otro caso

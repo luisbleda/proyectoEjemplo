@@ -15,11 +15,13 @@ class CreateFileSpark:
         # Valores posibles
         clientes_ids = [f"{i:04d}" for i in range(1, 501)]
         codigos_clientes = [
-            f"{random.randint(10000000, 99999999)}{chr(random.randint(65, 90))}"
+            f"{random.randint(10000000, 99999999)}"
+            f"{chr(random.randint(65, 90))}"
             for _ in range(500)
         ]
         monedas = ["EUR", "USD", "GBP", "JPY", "MXN"]
-        tipos_operacion = ["Retirada Efectivo", "Tarjeta", "Transferencia", "Bizum"]
+        tipos_operacion = ["Retirada Efectivo", "Tarjeta",
+                           "Transferencia", "Bizum"]
 
         # Generar datos aleatorios con condición para importe_operativa
         datos = []
@@ -38,7 +40,9 @@ class CreateFileSpark:
 
             moneda = random.choice(monedas)
 
-            datos.append((id_cliente, fecha, codigo_cliente, importe, moneda, tipo_op))
+            datos.append(
+                (id_cliente, fecha, codigo_cliente,
+                 importe, moneda, tipo_op))
 
         # Definición del esquema
         schema = StructType([
